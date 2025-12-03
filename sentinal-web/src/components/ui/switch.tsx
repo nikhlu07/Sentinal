@@ -23,7 +23,7 @@ const Switch = React.forwardRef<HTMLDivElement, SwitchProps>(
                 <motion.div
                     className={cn(
                         "w-4 h-4 rounded-full shadow-sm",
-                        checked ? "bg-black" : "bg-ink-secondary"
+                        checked ? "bg-white" : "bg-ink-secondary"
                     )}
                     animate={{ x: checked ? 20 : 0 }}
                     transition={{ type: "spring", stiffness: 500, damping: 30 }}

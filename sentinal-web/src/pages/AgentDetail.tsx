@@ -12,7 +12,7 @@ export function AgentDetail() {
     const logs = [
         { time: '10:42:01', type: '[TASK]', color: 'text-primary', msg: 'Started scraping job #9921' },
         { time: '10:42:05', type: '[INFO]', color: 'text-ink-secondary', msg: 'Processed 500 tweets' },
-        { time: '10:42:08', type: '[WARN]', color: 'text-[#FFB74D]', msg: 'Rate limit approaching' },
+        { time: '10:42:08', type: '[WARN]', color: 'text-[#D97706]', msg: 'Rate limit approaching' },
         { time: '10:42:12', type: '[SUCCESS]', color: 'text-primary', msg: 'Job completed. Data stored.' },
     ];
 
@@ -98,7 +98,7 @@ export function AgentDetail() {
                             <div className="relative">
                                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-primary font-mono">{'>'}</span>
                                 <Input className="pl-8 pr-10 bg-canvas border-primary/30 focus:border-primary" placeholder="Enter command..." />
-                                <button className="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-white transition-colors">
+                                <button className="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-ink-primary transition-colors">
                                     <Send className="w-4 h-4" />
                                 </button>
                             </div>

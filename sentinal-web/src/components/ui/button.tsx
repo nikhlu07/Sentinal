@@ -20,7 +20,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             primary: "bg-primary text-canvas hover:shadow-sentinel-glow border border-transparent clip-corners",
             secondary: "bg-transparent text-primary border border-primary hover:bg-primary-dim",
             hazard: "bg-hazard text-white hover:shadow-hazard-glow border border-transparent",
-            ghost: "bg-transparent text-ink-secondary hover:text-primary hover:bg-white/5",
+            ghost: "bg-transparent text-ink-secondary hover:text-primary hover:bg-ink-primary/5",
         };
 
         const sizes = {

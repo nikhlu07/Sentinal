@@ -24,7 +24,7 @@ export function Landing() {
         const logTypes = [
             { type: '[INFO]', color: 'text-ink-secondary' },
             { type: '[SCAN]', color: 'text-primary' },
-            { type: '[WARN]', color: 'text-[#FFB74D]' },
+            { type: '[WARN]', color: 'text-[#D97706]' },
             { type: '[TX]', color: 'text-ink-primary' }
         ];
 
@@ -167,11 +167,11 @@ export function Landing() {
                         <h3 className="font-mono text-lg text-ink-primary mb-1">UNIT-8842</h3>
                         <p className="text-xs text-ink-secondary mb-6">Arbitrage & Liquidity</p>
                         <div className="space-y-3 font-mono text-xs">
-                            <div className="flex justify-between border-b border-white/5 pb-2">
+                            <div className="flex justify-between border-b border-border-faint pb-2">
                                 <span className="text-ink-secondary">STATUS</span>
                                 <span className="text-primary">ONLINE</span>
                             </div>
-                            <div className="flex justify-between border-b border-white/5 pb-2">
+                            <div className="flex justify-between border-b border-border-faint pb-2">
                                 <span className="text-ink-secondary">UPTIME</span>
                                 <span className="text-ink-primary">14h 22m</span>
                             </div>
@@ -196,11 +196,11 @@ export function Landing() {
                         <h3 className="font-mono text-lg text-ink-primary mb-1">UNIT-9921</h3>
                         <p className="text-xs text-ink-secondary mb-6">Social Sentiment Analysis</p>
                         <div className="space-y-3 font-mono text-xs">
-                            <div className="flex justify-between border-b border-white/5 pb-2">
+                            <div className="flex justify-between border-b border-border-faint pb-2">
                                 <span className="text-ink-secondary">STATUS</span>
                                 <span className="text-primary">ONLINE</span>
                             </div>
-                            <div className="flex justify-between border-b border-white/5 pb-2">
+                            <div className="flex justify-between border-b border-border-faint pb-2">
                                 <span className="text-ink-secondary">UPTIME</span>
                                 <span className="text-ink-primary">02h 45m</span>
                             </div>
@@ -225,11 +225,11 @@ export function Landing() {
                         <h3 className="font-mono text-lg text-ink-primary mb-1">UNIT-7710</h3>
                         <p className="text-xs text-ink-secondary mb-6">Contract Auditor</p>
                         <div className="space-y-3 font-mono text-xs">
-                            <div className="flex justify-between border-b border-white/5 pb-2">
+                            <div className="flex justify-between border-b border-border-faint pb-2">
                                 <span className="text-ink-secondary">STATUS</span>
                                 <span className="text-hazard blink-text">FLAGGED</span>
                             </div>
-                            <div className="flex justify-between border-b border-white/5 pb-2">
+                            <div className="flex justify-between border-b border-border-faint pb-2">
                                 <span className="text-ink-secondary">UPTIME</span>
                                 <span className="text-ink-primary">--</span>
                             </div>
@@ -248,17 +248,17 @@ export function Landing() {
                     {/* Agent Card 4: Busy/Caution */}
                     <Card variant="caution">
                         <div className="flex justify-between items-start mb-4">
-                            <span className="font-mono text-xs text-[#FFB74D] border border-[#FFB74D]/30 px-2 py-0.5 rounded-sm bg-[#FFB74D]/5">GAMMA</span>
+                            <span className="font-mono text-xs text-[#D97706] border border-[#D97706]/30 px-2 py-0.5 rounded-sm bg-[#D97706]/5">GAMMA</span>
                             <StatusIndicator status="busy" pulse />
                         </div>
                         <h3 className="font-mono text-lg text-ink-primary mb-1">UNIT-1029</h3>
                         <p className="text-xs text-ink-secondary mb-6">Data Aggregation</p>
                         <div className="space-y-3 font-mono text-xs">
-                            <div className="flex justify-between border-b border-white/5 pb-2">
+                            <div className="flex justify-between border-b border-border-faint pb-2">
                                 <span className="text-ink-secondary">STATUS</span>
-                                <span className="text-[#FFB74D]">BUSY</span>
+                                <span className="text-[#D97706]">BUSY</span>
                             </div>
-                            <div className="flex justify-between border-b border-white/5 pb-2">
+                            <div className="flex justify-between border-b border-border-faint pb-2">
                                 <span className="text-ink-secondary">UPTIME</span>
                                 <span className="text-ink-primary">119h 20m</span>
                             </div>
@@ -269,7 +269,7 @@ export function Landing() {
                         </div>
                         <div className="mt-6 pt-4 border-t border-dashed border-border-faint">
                             <div className="w-full bg-canvas h-1 rounded-full overflow-hidden">
-                                <div className="bg-[#FFB74D] h-full w-[99%]"></div>
+                                <div className="bg-[#D97706] h-full w-[99%]"></div>
                             </div>
                         </div>
                     </Card>

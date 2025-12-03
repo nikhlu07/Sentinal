@@ -41,7 +41,7 @@ export function Registry() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {agents.map((agent) => (
-                    <Card key={agent.id} className="group border-l-[3px] border-l-primary hover:bg-[#27272A] transition-all duration-300">
+                    <Card key={agent.id} className="group border-l-[3px] border-l-primary hover:bg-primary/5 transition-all duration-300">
                         <div className="flex justify-between items-start mb-4">
                             <Badge variant={agent.status === 'online' ? 'success' : agent.status === 'busy' ? 'default' : 'hazard'}>
                                 {agent.status.toUpperCase()}

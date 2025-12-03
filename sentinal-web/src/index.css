@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-canvas text-ink-primary overflow-x-hidden;
-  }
+    body {
+        @apply bg-canvas text-ink-primary overflow-x-hidden;
+    }
 }
 
 /* Scanline Overlay Effect */
@@ -15,13 +15,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0),
-        rgba(255,255,255,0) 50%,
-        rgba(0,0,0,0.1) 50%,
-        rgba(0,0,0,0.1)
-    );
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0) 50%,
+            rgba(0, 0, 0, 0.05) 50%,
+            rgba(0, 0, 0, 0.05));
     background-size: 100% 4px;
     pointer-events: none;
     z-index: 50;
@@ -32,14 +30,17 @@
 ::-webkit-scrollbar {
     width: 6px;
 }
+
 ::-webkit-scrollbar-track {
-    background: #18181B;
+    background: #F1F5F9;
 }
+
 ::-webkit-scrollbar-thumb {
-    background: #27272A;
+    background: #CBD5E1;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-    background: #00E676;
+    background: #059669;
 }
 
 /* Utility for blinking cursor */
@@ -47,14 +48,17 @@
     content: '_';
     animation: blink 1s step-end infinite;
 }
-@keyframes blink { 50% { opacity: 0; } }
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
 
 .clip-corners {
-    clip-path: polygon(
-        0 0, 
-        100% 0, 
-        100% calc(100% - 10px), 
-        calc(100% - 10px) 100%, 
-        0 100%
-    );
+    clip-path: polygon(0 0,
+            100% 0,
+            100% calc(100% - 10px),
+            calc(100% - 10px) 100%,
+            0 100%);
 }

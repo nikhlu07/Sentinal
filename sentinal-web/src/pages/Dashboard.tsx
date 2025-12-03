@@ -67,9 +67,9 @@ export function Dashboard() {
                 <Card className="p-6 border-l-4 border-l-border-faint">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="text-ink-secondary text-xs font-mono uppercase">Network Load</h3>
-                        <Zap className="w-4 h-4 text-[#FFB74D]" />
+                        <Zap className="w-4 h-4 text-[#D97706]" />
                     </div>
-                    <p className="text-2xl font-mono text-[#FFB74D] font-bold">78%</p>
+                    <p className="text-2xl font-mono text-[#D97706] font-bold">78%</p>
                     <p className="text-xs text-ink-secondary mt-2">142 TPS</p>
                 </Card>
             </div>
@@ -91,7 +91,7 @@ export function Dashboard() {
                             </thead>
                             <tbody className="divide-y divide-border-faint bg-canvas/50">
                                 {[1, 2, 3, 4, 5].map((i) => (
-                                    <tr key={i} className="hover:bg-white/5 transition-colors">
+                                    <tr key={i} className="hover:bg-ink-primary/5 transition-colors">
                                         <td className="px-6 py-4 text-primary">0x7a...4b9c</td>
                                         <td className="px-6 py-4 text-ink-primary">PAYMENT</td>
                                         <td className="px-6 py-4 text-ink-primary">450 USDC</td>

@@ -13,7 +13,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         const variants = {
             default: "border-border-faint hover:border-primary hover:shadow-sentinel-glow",
             hazard: "border-hazard/40 hover:border-hazard hover:shadow-hazard-glow",
-            caution: "border-border-faint hover:border-[#FFB74D]",
+            caution: "border-border-faint hover:border-[#D97706]",
         };
 
         return (
