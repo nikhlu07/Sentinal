@@ -1,0 +1,16 @@
+name = "sentinel-registry-mcp"
+main = "src/index.ts"
+compatibility_date = "2024-02-08"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "sentinel-registry-db"
+database_id = "TO_BE_FILLED_AFTER_CREATION"
+
+[[vectorize]]
+binding = "VECTOR_INDEX"
+index_name = "sentinel-index"
+
+[ai]
+binding = "AI"
+
