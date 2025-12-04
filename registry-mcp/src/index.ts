@@ -18,7 +18,7 @@ app.get('/', (c) => {
 
 app.post('/register', async (c) => {
     const body = await c.req.json()
-    const { name, description, capabilities, pricing, owner_id } = body
+    const { name, description, capabilities, pricing, owner_id, wallet_id } = body
 
     if (!name || !description || !owner_id) {
         return c.json({ error: 'Missing required fields' }, 400)
@@ -35,15 +35,15 @@ app.post('/register', async (c) => {
 
     // Insert into D1
     await c.env.DB.prepare(
-        `INSERT INTO agents (id, name, description, capabilities, pricing, owner_id) VALUES (?, ?, ?, ?, ?, ?)`
-    ).bind(id, name, description, JSON.stringify(capabilities), JSON.stringify(pricing), owner_id).run()
+        `INSERT INTO agents (id, name, description, capabilities, pricing, owner_id, wallet_id) VALUES (?, ?, ?, ?, ?, ?, ?)`
+    ).bind(id, name, description, JSON.stringify(capabilities), JSON.stringify(pricing), owner_id, wallet_id || null).run()
 
     // Insert into Vectorize
     await c.env.VECTOR_INDEX.upsert([
         {
             id: id,
             values: values,
-            metadata: { name, description }
+            metadata: { name, description, wallet_id: wallet_id || '' }
         }
     ])
 
@@ -65,14 +65,22 @@ app.get('/search', async (c) => {
     // Search Vectorize
     const vectorMatches = await c.env.VECTOR_INDEX.query(values, { topK: 5, returnMetadata: true })
 
-    // Fetch full details from D1 (optional, if we need more than metadata)
-    // For now, returning vector matches is sufficient for discovery
-
     return c.json({
         network: 'edenlayer-v1',
         node_id: 'sentinel-01',
         matches: vectorMatches.matches
     })
+})
+
+app.get('/agent/:id', async (c) => {
+    const id = c.req.param('id')
+    const agent = await c.env.DB.prepare('SELECT * FROM agents WHERE id = ?').bind(id).first()
+
+    if (!agent) {
+        return c.json({ error: 'Agent not found' }, 404)
+    }
+
+    return c.json(agent)
 })
 
 export default app

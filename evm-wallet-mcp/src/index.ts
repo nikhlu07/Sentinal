@@ -1,5 +1,5 @@
 import express from 'express';
-import { Client, PrivateKey, AccountId, Hbar, TransferTransaction, AccountCreateTransaction } from '@hashgraph/sdk';
+import { Client, PrivateKey, AccountId, Hbar, TransferTransaction, AccountCreateTransaction, AccountBalanceQuery } from '@hashgraph/sdk';
 import dotenv from 'dotenv';
 
 import cors from 'cors';
@@ -28,8 +28,25 @@ try {
     client = Client.forTestnet();
 }
 
-app.get('/', (req, res) => {
-    res.send('Sentinel EVM Wallet MCP is Operational');
+res.send('Sentinel EVM Wallet MCP is Operational');
+});
+
+app.get('/balance/:accountId', async (req, res) => {
+    const { accountId } = req.params;
+
+    try {
+        const balance = await new AccountBalanceQuery()
+            .setAccountId(accountId)
+            .execute(client);
+
+        res.json({
+            status: 'success',
+            accountId,
+            balance: balance.hbars.toString()
+        });
+    } catch (error: any) {
+        res.status(500).json({ status: 'error', message: error.message });
+    }
 });
 
 app.post('/create-account', async (req, res) => {

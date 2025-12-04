@@ -72,19 +72,22 @@ app.post('/execute-task', async (req, res) => {
         // 4. Pay the agent
         if (budget && budget > 0) {
             console.log(`[NullShot Manager] Paying agent ${budget} HBAR...`);
-            // We need the agent's wallet ID. For now, we'll assume it's in metadata or use a placeholder.
-            // In a real scenario, the agent would provide an invoice.
-            const agentWalletId = bestAgent.metadata.wallet_id || '0.0.12345'; // Placeholder
 
-            try {
-                await axios.post(`${WALLET_URL}/transfer`, {
-                    toAccountId: agentWalletId,
-                    amount: budget
-                });
-                console.log(`[NullShot Manager] Payment successful`);
-            } catch (payError: any) {
-                console.warn(`[NullShot Manager] Payment failed: ${payError.message}`);
-                // Continue anyway for demo purposes
+            const agentWalletId = bestAgent.metadata.wallet_id;
+
+            if (!agentWalletId) {
+                console.warn(`[NullShot Manager] Agent ${bestAgent.metadata.name} has no wallet_id. Payment skipped.`);
+            } else {
+                try {
+                    await axios.post(`${WALLET_URL}/transfer`, {
+                        toAccountId: agentWalletId,
+                        amount: budget
+                    });
+                    console.log(`[NullShot Manager] Payment successful to ${agentWalletId}`);
+                } catch (payError: any) {
+                    console.warn(`[NullShot Manager] Payment failed: ${payError.message}`);
+                    // Continue anyway for demo purposes
+                }
             }
         }
 

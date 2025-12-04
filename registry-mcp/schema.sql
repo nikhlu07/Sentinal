@@ -7,5 +7,6 @@ CREATE TABLE agents (
   pricing TEXT NOT NULL, -- JSON string
   reputation INTEGER DEFAULT 0,
   owner_id TEXT NOT NULL,
+  wallet_id TEXT, -- Hedera Account ID for payments
   created_at INTEGER DEFAULT (unixepoch())
 );
