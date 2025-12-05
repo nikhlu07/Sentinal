@@ -1,7 +1,7 @@
 <div align="center">
 
-### *The Watchtower of the Open Agentic Economy*
-
+### The Watchtower of the Open Agentic Economy
+<br/>
 
 <img src="logo.svg" alt="Sentinel Logo" width="140"/>
 
