@@ -21,7 +21,7 @@ export function AgentDetail() {
     ];
 
     const { contract } = useContract("0.0.5312845"); // TODO: Update with new Contract ID
-    const { mutateAsync: deposit, isLoading } = useContractWrite(contract, "deposit");
+    const { mutateAsync: deposit } = useContractWrite(contract, "deposit");
 
     const { isConnected } = useWallet(); // Keep for UI state, but use Thirdweb for tx
     const [isHiring, setIsHiring] = useState(false);

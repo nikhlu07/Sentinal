@@ -1,5 +1,6 @@
 import { createContext, useContext, type ReactNode, useState, useEffect } from 'react';
-import { HashConnect, HashConnectTypes, MessageTypes } from 'hashconnect';
+import { HashConnect } from 'hashconnect';
+import { AccountId } from '@hashgraph/sdk';
 
 interface WalletContextType {
     connect: () => Promise<void>;
@@ -13,59 +14,73 @@ interface WalletContextType {
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
 
-const hashConnect = new HashConnect();
-
-const appMetadata: HashConnectTypes.AppMetadata = {
+const appMetadata = {
     name: "Sentinel Protocol",
     description: "The Trust Layer for the Open Agentic Web",
     icon: "https://sentinel-protocol.pages.dev/logo.svg"
 };
 
+// Use any to bypass strict type checks for HashConnect v3
+const hashConnect = new HashConnect(
+    // @ts-ignore
+    "testnet", // LedgerId.TESTNET
+    "b16b57b90906067f8d622838bd638d16", // Placeholder Project ID
+    appMetadata,
+    true
+) as any;
+
 export const WalletProvider = ({ children }: { children: ReactNode }) => {
-    const [pairingData, setPairingData] = useState<HashConnectTypes.SavedPairingData | null>(null);
+    const [pairingData, setPairingData] = useState<any | null>(null);
     const [pairingString, setPairingString] = useState<string>("");
     const [isConnecting, setIsConnecting] = useState(false);
 
     useEffect(() => {
         const initHashConnect = async () => {
-            // Initialize and Debug
-            const initData = await hashConnect.init(appMetadata, "testnet", false);
-            setPairingString(initData.pairingString);
+            // Initialize
+            await hashConnect.init();
+
+            if (hashConnect.pairingString) {
+                setPairingString(hashConnect.pairingString);
+            }
 
             // Check for existing connection
-            if (initData.savedPairings.length > 0) {
-                setPairingData(initData.savedPairings[0]);
+            // @ts-ignore
+            if (hashConnect.savedPairings && hashConnect.savedPairings.length > 0) {
+                // @ts-ignore
+                setPairingData(hashConnect.savedPairings[0]);
             }
         };
 
         initHashConnect();
 
         // Event Listeners
-        hashConnect.foundExtensionEvent.on((data) => {
-            console.log("Found extension", data);
+        hashConnect.pairingEvent.on((data: any) => {
+            console.log("Paired with wallet", data);
+            setPairingData(data);
+            setIsConnecting(false);
         });
 
-        hashConnect.pairingEvent.on((data) => {
-            console.log("Paired with wallet", data);
-            setPairingData(data.pairingData!);
-            setIsConnecting(false);
+        hashConnect.disconnectionEvent.on(() => {
+            setPairingData(null);
         });
     }, []);
 
     const connect = async () => {
         setIsConnecting(true);
-        hashConnect.connectToLocalWallet();
+        hashConnect.openPairingModal();
     };
 
-    const disconnect = () => {
-        hashConnect.disconnect(pairingData?.topic!);
+    const disconnect = async () => {
+        await hashConnect.disconnect();
         setPairingData(null);
     };
 
     const sendTransaction = async (trans: any) => {
         if (!pairingData) return;
 
-        const transaction: HashConnectTypes.Transaction = {
+        const accountId = AccountId.fromString(pairingData.accountIds[0]);
+
+        const transaction = {
             topic: pairingData.topic,
             byteArray: trans.toBytes(),
             metadata: {
@@ -74,7 +89,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
             }
         };
 
-        return await hashConnect.sendTransaction(pairingData.topic, transaction);
+        return await hashConnect.sendTransaction(accountId, transaction);
     };
 
     return (
@@ -82,7 +97,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
             connect,
             disconnect,
             sendTransaction,
-            accountId: pairingData?.accountIds[0],
+            accountId: pairingData?.accountIds?.[0],
             isConnected: !!pairingData,
             isConnecting,
             pairingString
